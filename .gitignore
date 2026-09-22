@@ -1,0 +1,8 @@
+# Chi day len file .ipynb va thu muc images/
+*.pdf
+*.csv
+bai2.png
+.ipynb_checkpoints/
+__pycache__/
+.venv/
+.vscode/
