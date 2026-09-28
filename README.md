@@ -9,10 +9,13 @@ Kho lưu trữ các bài thực hành môn **Học máy ứng dụng**. Mỗi b�
 ├── 01. Linear Regression/
 │   ├── Lab01_Hoi_quy_tuyen_tinh.ipynb   # Notebook bài 1
 │   └── images/                          # Hình ảnh kết quả sinh ra từ notebook
+├── 02. Logistic Regression/
+│   ├── Lab02_Hoi_quy_logistic.ipynb     # Notebook bài 2
+│   └── images/                          # Hình ảnh kết quả sinh ra từ notebook
 └── README.md
 ```
 
-> Các file `.csv` và `.pdf` được liệt kê trong `.gitignore` nên không được đẩy lên GitHub. Dữ liệu `gia_nha.csv` cần đặt cạnh notebook khi chạy lại.
+> Các file `.csv` và `.pdf` được liệt kê trong `.gitignore` nên không được đẩy lên GitHub. Dữ liệu (`gia_nha.csv`, `sinh_vien.csv`) cần đặt cạnh notebook tương ứng khi chạy lại.
 
 ## Danh sách bài
 
@@ -38,6 +41,28 @@ Dự đoán giá nhà từ bộ dữ liệu `gia_nha.csv` (các cột `dien_tich
 4. Thêm số phòng vào mô hình
 5. Thử hai tốc độ học khác
 6. Viết hàm dự đoán có cảnh báo ngoài vùng dữ liệu
+
+### Bài 2 — Hồi quy logistic
+
+Dự đoán sinh viên qua hay rớt môn từ bộ dữ liệu `sinh_vien.csv` (các cột `gio_on`, `diem_giua_ky`, `qua_mon`).
+
+**Phần A — Thực hành**
+
+1. Đọc dữ liệu, so trung bình đặc trưng giữa hai lớp, vì sao đường thẳng của bài 1 không dùng được
+2. Tự cài đặt và kiểm chứng hàm sigmoid
+3. Khớp mô hình bằng `sklearn.linear_model.LogisticRegression`, đọc `predict_proba`
+4. Ma trận nhầm lẫn và bốn thước đo (accuracy, precision, recall, F1)
+5. Đổi ngưỡng quyết định, đánh đổi giữa precision và recall
+6. Thêm biến thứ hai và vẽ biên quyết định
+
+**Phần B — Bài tập**
+
+1. Thống kê tỷ lệ qua môn theo nhóm điểm giữa kỳ
+2. Vẽ hàm sigmoid
+3. Hàm dự đoán cho một bạn cụ thể
+4. Tự tính bốn thước đo từ TP, TN, FP, FN
+5. Dò ngưỡng tốt nhất theo F1
+6. Đổi lớp dương rồi chấm lại
 
 ## Môi trường
 
