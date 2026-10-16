@@ -12,10 +12,13 @@ Kho lưu trữ các bài thực hành môn **Học máy ứng dụng**. Mỗi b�
 ├── 02. Logistic Regression/
 │   ├── Lab02_Hoi_quy_logistic.ipynb     # Notebook bài 2
 │   └── images/                          # Hình ảnh kết quả sinh ra từ notebook
+├── 03. Naive Bayes/
+│   ├── Lab03_Naive_Bayes.ipynb          # Notebook bài 3
+│   └── images/                          # Hình ảnh kết quả sinh ra từ notebook
 └── README.md
 ```
 
-> Các file `.csv` và `.pdf` được liệt kê trong `.gitignore` nên không được đẩy lên GitHub. Dữ liệu (`gia_nha.csv`, `sinh_vien.csv`) cần đặt cạnh notebook tương ứng khi chạy lại.
+> Các file `.csv` và `.pdf` được liệt kê trong `.gitignore` nên không được đẩy lên GitHub. Dữ liệu (`gia_nha.csv`, `sinh_vien.csv`, `tin_nhan.csv`) cần đặt cạnh notebook tương ứng khi chạy lại.
 
 ## Danh sách bài
 
@@ -63,6 +66,27 @@ Dự đoán sinh viên qua hay rớt môn từ bộ dữ liệu `sinh_vien.csv` 
 4. Tự tính bốn thước đo từ TP, TN, FP, FN
 5. Dò ngưỡng tốt nhất theo F1
 6. Đổi lớp dương rồi chấm lại
+
+### Bài 3 — Naive Bayes
+
+Lọc tin nhắn rác từ bộ dữ liệu `tin_nhan.csv` (các cột `noi_dung`, `la_rac`), và dùng lại `sinh_vien.csv` của bài 2 để so với hồi quy logistic.
+
+**Phần A — Thực hành**
+
+1. Tính định lý Bayes bằng tay (ví dụ xét nghiệm bệnh, hai dây chuyền sản xuất)
+2. Biến văn bản thành bảng số bằng túi từ và `CountVectorizer`
+3. Huấn luyện và chấm điểm bộ lọc tin rác bằng `MultinomialNB`
+4. Tự cài Naive Bayes để thấy vấn đề số không, làm trơn Laplace, tràn dưới
+5. `GaussianNB` cho số liệu liên tục, so với hồi quy logistic và khảo sát theo cỡ dữ liệu
+
+**Phần B — Bài tập**
+
+1. Bayes với ba nguyên nhân
+2. Từ nào tố cáo tin rác mạnh nhất
+3. Đổi tham số làm trơn alpha
+4. Tự viết bộ lọc không dùng thư viện (cộng loga)
+5. Chọn sai biến thể Naive Bayes
+6. Lớp hiếm và xác suất tiên nghiệm
 
 ## Môi trường
 
