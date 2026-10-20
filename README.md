@@ -15,10 +15,13 @@ Kho lưu trữ các bài thực hành môn **Học máy ứng dụng**. Mỗi b�
 ├── 03. Naive Bayes/
 │   ├── Lab03_Naive_Bayes.ipynb          # Notebook bài 3
 │   └── images/                          # Hình ảnh kết quả sinh ra từ notebook
+├── 04. KNN/
+│   ├── Lab04_KNN.ipynb                  # Notebook bài 4
+│   └── images/                          # Hình ảnh kết quả sinh ra từ notebook
 └── README.md
 ```
 
-> Các file `.csv` và `.pdf` được liệt kê trong `.gitignore` nên không được đẩy lên GitHub. Dữ liệu (`gia_nha.csv`, `sinh_vien.csv`, `tin_nhan.csv`) cần đặt cạnh notebook tương ứng khi chạy lại.
+> Các file `.csv` và `.pdf` được liệt kê trong `.gitignore` nên không được đẩy lên GitHub. Dữ liệu (`gia_nha.csv`, `sinh_vien.csv`, `tin_nhan.csv`, `sinh_vien_mo_rong.csv`, `hai_vang_trang.csv`) cần đặt cạnh notebook tương ứng khi chạy lại.
 
 ## Danh sách bài
 
@@ -87,6 +90,27 @@ Lọc tin nhắn rác từ bộ dữ liệu `tin_nhan.csv` (các cột `noi_dung
 4. Tự viết bộ lọc không dùng thư viện (cộng loga)
 5. Chọn sai biến thể Naive Bayes
 6. Lớp hiếm và xác suất tiên nghiệm
+
+### Bài 4 — K láng giềng gần nhất
+
+Dùng `sinh_vien_mo_rong.csv` (thêm cột `chi_tieu`), `hai_vang_trang.csv` (300 điểm có ranh giới cong) và `gia_nha.csv` của bài 1.
+
+**Phần A — Thực hành**
+
+1. Tự tính khoảng cách Euclid và tìm láng giềng bằng numpy
+2. Hậu quả của việc quên chuẩn hoá, `StandardScaler` và `make_pipeline`
+3. Chọn số láng giềng k bằng kiểm định chéo
+4. So KNN với hồi quy logistic và Naive Bayes, lời nguyền số chiều
+5. KNN cho bài toán hồi quy và giới hạn ngoại suy
+
+**Phần B — Bài tập**
+
+1. Tự viết KNN không dùng thư viện
+2. Khoảng cách Manhattan
+3. Đổi đơn vị đo
+4. Láng giềng có trọng số
+5. Chọn k cho bài toán hồi quy
+6. Đo thời gian dự đoán (học lười)
 
 ## Môi trường
 
