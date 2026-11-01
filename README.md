@@ -18,10 +18,14 @@ Kho lưu trữ các bài thực hành môn **Học máy ứng dụng**. Mỗi b�
 ├── 04. KNN/
 │   ├── Lab04_KNN.ipynb                  # Notebook bài 4
 │   └── images/                          # Hình ảnh kết quả sinh ra từ notebook
+├── 05.DecisionTree_RandomForest/
+│   ├── Lab05_CayQuyetDinh_RungNgauNhien.ipynb  # Notebook bài 5
+│   └── images/                          # 13 hình kết quả, gồm cây năm lá
+├── PROJECT_CONTEXT.md                   # Bối cảnh và tiến độ dự án
 └── README.md
 ```
 
-> Các file `.csv` và `.pdf` được liệt kê trong `.gitignore` nên không được đẩy lên GitHub. Dữ liệu (`gia_nha.csv`, `sinh_vien.csv`, `tin_nhan.csv`, `sinh_vien_mo_rong.csv`, `hai_vang_trang.csv`) cần đặt cạnh notebook tương ứng khi chạy lại.
+> Các file `.csv`, `.pdf` và gói dữ liệu `Lab05_data.zip` được liệt kê trong `.gitignore` nên không được đẩy lên GitHub. Dữ liệu (`gia_nha.csv`, `sinh_vien.csv`, `tin_nhan.csv`, `sinh_vien_mo_rong.csv`, `hai_vang_trang.csv`, `khach_vay.csv`) cần đặt cạnh notebook tương ứng hoặc trong thư mục `data/` của lab khi chạy lại. Với Lab5, giải nén `Lab05_data.zip` trong `05.DecisionTree_RandomForest/` để có `data/khach_vay.csv` và `data/gia_nha.csv`.
 
 ## Danh sách bài
 
@@ -111,6 +115,44 @@ Dùng `sinh_vien_mo_rong.csv` (thêm cột `chi_tieu`), `hai_vang_trang.csv` (30
 4. Láng giềng có trọng số
 5. Chọn k cho bài toán hồi quy
 6. Đo thời gian dự đoán (học lười)
+
+### Bài 5 — Cây quyết định và Rừng ngẫu nhiên
+
+[Mở notebook Lab5](05.DecisionTree_RandomForest/Lab05_CayQuyetDinh_RungNgauNhien.ipynb).
+
+Dùng `khach_vay.csv` (600 hồ sơ, bốn đặc trưng: `thu_nhap`, `ty_le_no`, `co_viec_on_dinh`, `so_nguoi_phu_thuoc`; nhãn `tra_dung_han`) và `gia_nha.csv` (60 căn hộ).
+
+**Phần A — Thực hành**
+
+1. Tự tính Gini, thử mọi ngưỡng và đối chiếu cây một tầng
+2. Học cây năm lá, đọc luật, đường đi và xác suất của hai khách mới
+3. Nhận diện quá khớp, chọn độ sâu bằng kiểm định chéo 5 phần
+4. Kiểm chứng cây không cần chuẩn hoá hoặc đổi đơn vị đo
+5. Bootstrap, rừng 200 cây và so sánh với cây đơn
+6. Độ quan trọng MDI và giới hạn khi thêm cột ngẫu nhiên
+7. Cây hồi quy, so MAE với đường thẳng và giới hạn ngoại suy
+
+**Phần B — Bài tập**
+
+1. Vẽ cây năm lá và cây sâu 2; giải thích hai lá cùng nhãn vẫn được tách
+2. Tự viết `tim_cau_hoi(X, y)` trên 450 khách; kiểm chứng ngưỡng thu nhập 15.05
+3. So Gini với entropy, chọn độ sâu riêng bằng kiểm định chéo
+4. Chọn `min_samples_leaf`, so với giới hạn độ sâu 5
+5. Permutation importance với 20 lần xáo trộn, so thứ hạng cột ngẫu nhiên với MDI
+6. Rừng hồi quy 200 cây, so MAE và giải thích dự đoán căn 250 m²
+
+Notebook đã chạy toàn bộ bằng Python 3.11.9, NumPy 1.26.4, pandas 2.3.3, matplotlib 3.10.8 và scikit-learn 1.8.0; giữ sẵn kết quả và 13 hình trong `images/`.
+
+| Thí nghiệm | Kết quả trên tập kiểm tra |
+|---|---|
+| Cây mọc tự do | Accuracy 0.7667 |
+| Cây sâu 5, chọn bằng CV | Accuracy 0.8533 |
+| Rừng phân loại 200 cây | Accuracy 0.9000 |
+| Cây hồi quy sâu 3 | MAE 0.5039 tỷ đồng |
+| Rừng hồi quy 200 cây | MAE 0.4559 tỷ đồng |
+| Hồi quy tuyến tính | MAE 0.2578 tỷ đồng |
+
+Chọn tham số chỉ bằng tập học; các thí nghiệm dùng chung cách chia theo đề. Để chạy lại, mở notebook và chọn **Restart Kernel and Run All Cells** sau khi đặt đủ dữ liệu.
 
 ## Môi trường
 
