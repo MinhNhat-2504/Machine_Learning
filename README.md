@@ -21,7 +21,6 @@ Kho lưu trữ các bài thực hành môn **Học máy ứng dụng**. Mỗi b�
 ├── 05.DecisionTree_RandomForest/
 │   ├── Lab05_CayQuyetDinh_RungNgauNhien.ipynb  # Notebook bài 5
 │   └── images/                          # 13 hình kết quả, gồm cây năm lá
-├── PROJECT_CONTEXT.md                   # Bối cảnh và tiến độ dự án
 └── README.md
 ```
 
