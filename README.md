@@ -21,10 +21,22 @@ Kho lưu trữ các bài thực hành môn **Học máy ứng dụng**. Mỗi b�
 ├── 05.DecisionTree_RandomForest/
 │   ├── Lab05_CayQuyetDinh_RungNgauNhien.ipynb  # Notebook bài 5
 │   └── images/                          # 13 hình kết quả, gồm cây năm lá
+├── 06. SVM/
+│   ├── Lab06_SVM.ipynb                   # Notebook bài 6
+│   └── images/                          # 11 hình, gồm từng ảnh chữ số đoán sai
+├── 07. Accuracy_Metrics/
+│   ├── Lab07_DanhGiaMoHinh.ipynb          # Notebook bài 7
+│   └── images/                          # 5 hình, gồm roc.png
+├── 08. K-Means/
+│   ├── Lab08_KMeans.ipynb                # Notebook bài 8
+│   └── images/                          # 13 ảnh, gồm ảnh gốc và ảnh nén
+├── 09. MLP/
+│   ├── Lab09_MLP.ipynb                   # Notebook bài 9
+│   └── images/                          # 7 hình, gồm toc_do_hoc.png
 └── README.md
 ```
 
-> Các file `.csv`, `.pdf` và gói dữ liệu `Lab05_data.zip` được liệt kê trong `.gitignore` nên không được đẩy lên GitHub. Dữ liệu (`gia_nha.csv`, `sinh_vien.csv`, `tin_nhan.csv`, `sinh_vien_mo_rong.csv`, `hai_vang_trang.csv`, `khach_vay.csv`) cần đặt cạnh notebook tương ứng hoặc trong thư mục `data/` của lab khi chạy lại. Với Lab5, giải nén `Lab05_data.zip` trong `05.DecisionTree_RandomForest/` để có `data/khach_vay.csv` và `data/gia_nha.csv`.
+> Các file `.csv`, `.pdf` và gói dữ liệu `Lab*_data.zip` được liệt kê trong `.gitignore` nên không được đẩy lên GitHub. Để chạy lại, giải nén gói dữ liệu tương ứng vào thư mục lab để có `data/*.csv`, hoặc đặt CSV trực tiếp cạnh notebook. Các bộ `load_digits` và ảnh `china.jpg` có sẵn trong scikit-learn, không tải mạng. Notebook có sẵn output để xem kết quả khi chưa có CSV.
 
 ## Danh sách bài
 
@@ -152,6 +164,113 @@ Notebook đã chạy toàn bộ bằng Python 3.11.9, NumPy 1.26.4, pandas 2.3.3
 | Hồi quy tuyến tính | MAE 0.2578 tỷ đồng |
 
 Chọn tham số chỉ bằng tập học; các thí nghiệm dùng chung cách chia theo đề. Để chạy lại, mở notebook và chọn **Restart Kernel and Run All Cells** sau khi đặt đủ dữ liệu.
+
+### Bài 6 — Máy vectơ hỗ trợ (SVM)
+
+[Mở notebook Lab6](06.%20SVM/Lab06_SVM.ipynb).
+
+Dữ liệu: `sinh_vien.csv`, `sinh_vien_mo_rong.csv`, `hai_vang_trang.csv`, 24 điểm `make_blobs` và ảnh chữ số `load_digits`.
+
+**Phần A — Thực hành**
+
+1. Học biên tuyến tính, tính độ rộng lề, xem vectơ hỗ trợ và học lại chỉ với các điểm hỗ trợ
+2. Khảo sát C và hậu quả quên chuẩn hoá
+3. Nâng chiều bằng tay, so kernel tuyến tính/đa thức/RBF với logistic và KNN
+4. Khảo sát gamma, chọn C/gamma bằng kiểm định chéo 5 phần
+5. Nhận dạng chữ số và so các mô hình trên cùng cách chia
+
+**Phần B — Bài tập**
+
+1. Tính tay f(x) và khoảng cách tới biên, kiểm chứng nửa độ rộng lề
+2. Thêm điểm xa/gần biên, giải thích bằng vectơ hỗ trợ
+3. Dò C cho kernel đa thức bậc 2, 3, 4
+4. Dò lưới mịn và so mức cải thiện CV
+5. Ma trận nhầm lẫn, lưu riêng từng ảnh chữ số bị đoán sai
+6. Đo thời gian SVC/LinearSVC với 2.000–20.000 mẫu
+
+Kết quả: lề **2.2126**, 3 vectơ hỗ trợ; RBF trên vầng trăng chọn **C=10, gamma=1**, accuracy **0.9200**; chữ số **0.9911**, sai 4/450 ảnh. Có **11 hình** trong `images/`.
+
+### Bài 7 — Đánh giá mô hình
+
+[Mở notebook Lab7](07.%20Accuracy_Metrics/Lab07_DanhGiaMoHinh.ipynb).
+
+Dữ liệu: `sinh_vien_bo_hoc.csv` (1.200 sinh viên, 119 bỏ học), `gia_nha.csv` và `load_digits`.
+
+**Phần A — Thực hành**
+
+1. So accuracy của mô hình lười và logistic trên dữ liệu lệch lớp
+2. Tự đếm TP/FP/FN/TN, đối chiếu ma trận nhầm lẫn
+3. Precision, recall, F1 và classification report
+4. Khảo sát ngưỡng; chọn ngưỡng từ xác suất out-of-fold trên tập học
+5. ROC/AUC và so sáu mô hình
+6. Phân tầng, CV nhiều thước đo và cân bằng lớp
+
+**Phần B — Bài tập**
+
+1. Hàm đánh giá chỉ dùng NumPy, xử lý rõ chia cho 0
+2. Precision/recall từng chữ số, so macro/weighted
+3. Chọn ngưỡng lớn nhất đạt recall OOF ≥0.8, rồi chấm kiểm tra
+4. Tự vẽ ROC logistic/rừng, lưu `roc.png`, phân tích chỗ đường cắt nhau
+5. So cân bằng lớp cho RandomForest và SVC
+6. Tác động của một dự đoán giá nhà sai thêm 5 tỷ lên MAE/RMSE/R²
+
+Kết quả: logistic accuracy **0.9467**, precision **0.8500**, recall **0.5667**, AUC **0.9449**. Ngưỡng recall yêu cầu chọn từ OOF là **0.1717736449**; kiểm tra đạt **0.8000**, precision **0.5106**, báo **47/300 bạn**. Có **5 hình**.
+
+### Bài 8 — Phân cụm K-Means
+
+[Mở notebook Lab8](08.%20K-Means/Lab08_KMeans.ipynb).
+
+Dữ liệu: `khach_hang.csv` (210 khách), `hai_vang_trang.csv`, ảnh `china.jpg`, `load_digits`. Ảnh bổ sung dùng biểu đồ Lab5 trong repo theo lựa chọn của người dùng; không phải ảnh cá nhân.
+
+**Phần A — Thực hành**
+
+1. Tự viết K-Means, lưu từng vòng, kiểm tra cụm rỗng và inertia với sklearn
+2. Phân khúc khách hàng, đọc tâm cụm ở đơn vị gốc và dự đoán khách mới
+3. Chọn K bằng khuỷu tay/silhouette
+4. Ba bẫy: thang đo, khởi tạo và cụm không tròn
+5. Nén ảnh 4/16/64 màu, phân biệt số bit lý tưởng với dung lượng tệp thực
+
+**Phần B — Bài tập**
+
+1. Tự tính silhouette từng điểm bằng NumPy, đánh dấu khách có điểm nhỏ nhất
+2. Thêm tuổi, chọn lại K và so sự thay đổi nhóm
+3. So 50 lần khởi tạo random với 50 lần K-Means++
+4. Lưu ảnh gốc/16 màu, so byte thực, nén thêm ảnh đọc từ repo và bỏ alpha
+5. DBSCAN với ba eps, đếm cụm/nhiễu và đánh giá hậu nghiệm
+6. Phân cụm chữ số không dùng nhãn khi fit, rồi phân tích bảng chéo
+
+Kết quả: thuật toán tự viết có inertia **8.5250**; khách hàng chọn **K=5**, silhouette **0.7227**. K-Means++ đạt nghiệm inertia 23.0 sau làm tròn ở **50/50** seed, random **30/50**. PNG mẫu 16 màu nhỏ hơn khoảng **4.09 lần**. Có **13 ảnh**. Với dữ liệu vầng trăng hiện có, cả ba eps của đề đều tạo một cụm, không tách tốt hơn K-Means; notebook giữ đúng kết quả này.
+
+### Bài 9 — Mạng nơ-ron nhiều lớp (MLP)
+
+[Mở notebook Lab9](09.%20MLP/Lab09_MLP.ipynb).
+
+Dữ liệu: `xor.csv`, `hai_vang_trang.csv`, `sinh_vien_mo_rong.csv`, `gia_nha.csv` và `load_digits`.
+
+**Phần A — Thực hành**
+
+1. Tự tính một nơ-ron và mạng ReLU giải bảng XOR bit
+2. So logistic với mạng 1/2/4/8 nơ-ron ẩn trên CSV góc có nhiễu
+3. Khảo sát kích thước mạng và chọn alpha bằng CV
+4. Kiểm chứng hậu quả quên chuẩn hoá
+5. Chữ số: đếm tham số, xem loss, dừng sớm và so các mô hình
+
+**Phần B — Bài tập**
+
+1. Tự lan truyền tiến từ coefs_/intercepts_, so xác suất với sklearn
+2. Kiểm chứng mạng XOR thứ hai và giải thích bằng trị tuyệt đối
+3. So logistic/tanh/ReLU trên cùng mạng hai lớp ẩn
+4. So bốn tốc độ học, số vòng/loss/accuracy, lưu `toc_do_hoc.png`
+5. GridSearchCV 12 cặp × 5 phần trên tập học chữ số
+6. MLP hồi quy so với đường thẳng, phân tích dự đoán ngoài miền tại 250 m²
+
+Kết quả: MLP chữ số cơ sở **7.510 tham số**, **144 vòng**, accuracy **0.9844**. Lưới chọn **(50,), alpha=1**, CV **0.9785**, kiểm tra **0.9822**, chưa vượt SVM **0.9911**. Lan truyền tiến NumPy khớp xác suất sklearn tới sai số khoảng **3.47×10⁻¹⁸**. Có **7 hình**, không ghi nhận cảnh báo hội tụ trong lần chạy kiểm tra.
+
+### Kiểm tra Lab6–9
+
+Cả **50 ô mã** của bốn notebook đã chạy từ kernel mới, không lỗi; có **36 tệp PNG** và kết quả nhúng trong notebook. Kiểm chứng gồm công thức lề SVM, TP/FP/FN/TN, chỉ số NumPy, ngưỡng OOF, K-Means/inertia/silhouette và lan truyền tiến MLP. Lab8 dùng nhãn thật chỉ sau phân cụm. Các giá trị thiếu có chủ đích trong bảng K=1 hoặc tỷ lệ thời gian dòng đầu được giữ là NaN vì chỉ số không xác định tại đó.
+
+Môi trường kiểm tra: Python **3.11.9**, NumPy **1.26.4**, pandas **2.3.3**, matplotlib **3.10.8**, scikit-learn **1.8.0**; BLAS/OpenMP giới hạn 1 luồng. Thời gian chạy và nghiệm MLP có thể khác giữa các máy/phiên bản; các nhận xét ghi theo kết quả thực chạy thay vì ép số trùng PDF.
 
 ## Môi trường
 
